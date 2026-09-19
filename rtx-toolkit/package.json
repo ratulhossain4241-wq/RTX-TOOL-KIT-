@@ -36,7 +36,16 @@
     "expo-network": "~6.0.1",
     "expo-file-system": "~17.0.1",
     "expo-device": "~6.0.2",
-    "expo-application": "~5.9.1"
+    "expo-application": "~5.9.1",
+    "expo-camera": "~15.0.16",
+    "expo-clipboard": "~6.0.3",
+    "react-native-qrcode-svg": "^6.3.2",
+    "expo-camera": "~15.0.14",
+    "expo-clipboard": "~6.0.3",
+    "expo-media-library": "~16.0.5",
+    "expo-secure-store": "~13.0.2",
+    "expo-crypto": "~13.0.2",
+    "react-native-qrcode-svg": "^6.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
