@@ -37,6 +37,7 @@
     "expo-file-system": "~17.0.1",
     "expo-device": "~6.0.2",
     "expo-application": "~5.9.1",
+    "expo-battery": "~8.0.1",
     "expo-camera": "~15.0.16",
     "expo-clipboard": "~6.0.3",
     "expo-media-library": "~16.0.5",
