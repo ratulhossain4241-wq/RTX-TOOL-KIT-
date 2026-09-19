@@ -1,0 +1,52 @@
+name: Build RTX TOOL KIT APK
+
+# Runs on every push to main, or manually from the Actions tab.
+# Requires an EXPO_TOKEN secret (Expo account access token) set in:
+# GitHub repo -> Settings -> Secrets and variables -> Actions -> New secret
+#
+# After this workflow finishes, go to the Actions tab -> click this run
+# -> scroll to "Artifacts" at the bottom -> download "rtx-toolkit-apk".
+# That zip contains the installable .apk file.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build APK on EAS (waits until done)
+        run: eas build --platform android --profile preview --non-interactive --wait
+
+      - name: Download built APK from EAS
+        run: |
+          BUILD_URL=$(eas build:list --platform android --limit 1 --json --non-interactive | node -e "process.stdin.once('data', d => console.log(JSON.parse(d)[0].artifacts.buildUrl))")
+          echo "Downloading APK from $BUILD_URL"
+          curl -L "$BUILD_URL" -o rtx-toolkit.apk
+
+      - name: Upload APK as downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rtx-toolkit-apk
+          path: rtx-toolkit.apk
+          retention-days: 30
