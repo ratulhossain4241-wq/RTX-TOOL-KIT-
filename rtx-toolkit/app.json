@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "RTX TOOL KIT",
+    "slug": "rtx-toolkit",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#05080a"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.rtx.toolkit",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#05080a"
+      },
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "ACCESS_WIFI_STATE",
+        "CHANGE_WIFI_STATE",
+        "ACCESS_FINE_LOCATION",
+        "NEARBY_WIFI_DEVICES",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "FOREGROUND_SERVICE",
+        "BIND_VPN_SERVICE",
+        "QUERY_ALL_PACKAGES"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "QR কোড স্ক্যান করতে ক্যামেরা এক্সেস দরকার।"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "ডুপ্লিকেট ছবি খুঁজতে গ্যালারি এক্সেস দরকার।"
+        }
+      ]
+    ]
+  }
+}
