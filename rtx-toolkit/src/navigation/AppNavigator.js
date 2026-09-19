@@ -16,6 +16,13 @@ import SpeedTestScreen from '../screens/tools/SpeedTestScreen';
 import StorageAnalyzerScreen from '../screens/tools/StorageAnalyzerScreen';
 import QrToolScreen from '../screens/tools/QrToolScreen';
 import ClipboardCleanerScreen from '../screens/tools/ClipboardCleanerScreen';
+import NetworkOptimizerScreen from '../screens/tools/NetworkOptimizerScreen';
+import JunkCleanerScreen from '../screens/tools/JunkCleanerScreen';
+import DuplicateFinderScreen from '../screens/tools/DuplicateFinderScreen';
+import AppLockScreen from '../screens/tools/AppLockScreen';
+import BatteryOptimizerScreen from '../screens/tools/BatteryOptimizerScreen';
+import SystemMonitorScreen from '../screens/tools/SystemMonitorScreen';
+import RouterDashboardScreen from '../screens/tools/RouterDashboardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,15 +45,8 @@ const NavDarkTheme = {
 // in a later batch - this list is the ONLY place to update when a real
 // screen replaces a placeholder (see comment at the bottom of this file).
 const PLACEHOLDER_SCREENS = [
-  { name: 'JunkCleaner', title: 'Junk Cleaner' },
-  { name: 'NetworkOptimizer', title: 'Network Optimizer' },
   { name: 'AdBlocker', title: 'Ad Blocker' },
-  { name: 'RouterDashboard', title: 'Router Dashboard' },
-  { name: 'BatteryOptimizer', title: 'Battery Optimizer' },
   { name: 'AppManager', title: 'App Manager' },
-  { name: 'SystemMonitor', title: 'CPU / RAM Monitor' },
-  { name: 'AppLock', title: 'App Lock' },
-  { name: 'DuplicateFinder', title: 'Duplicate Finder' },
   { name: 'WifiScanner', title: 'WiFi Scanner' },
   { name: 'FakeAppDetector', title: 'Fake App Detector' },
   { name: 'TvRemote', title: 'TV Remote' },
@@ -96,6 +96,41 @@ export default function AppNavigator() {
               name="ClipboardCleaner"
               component={ClipboardCleanerScreen}
               options={{ headerShown: true, title: 'Clipboard Cleaner' }}
+            />
+            <Stack.Screen
+              name="NetworkOptimizer"
+              component={NetworkOptimizerScreen}
+              options={{ headerShown: true, title: 'Network Optimizer' }}
+            />
+            <Stack.Screen
+              name="JunkCleaner"
+              component={JunkCleanerScreen}
+              options={{ headerShown: true, title: 'Junk Cleaner' }}
+            />
+            <Stack.Screen
+              name="DuplicateFinder"
+              component={DuplicateFinderScreen}
+              options={{ headerShown: true, title: 'Duplicate Finder' }}
+            />
+            <Stack.Screen
+              name="AppLock"
+              component={AppLockScreen}
+              options={{ headerShown: true, title: 'App Lock' }}
+            />
+            <Stack.Screen
+              name="BatteryOptimizer"
+              component={BatteryOptimizerScreen}
+              options={{ headerShown: true, title: 'Battery Optimizer' }}
+            />
+            <Stack.Screen
+              name="SystemMonitor"
+              component={SystemMonitorScreen}
+              options={{ headerShown: true, title: 'Device Info' }}
+            />
+            <Stack.Screen
+              name="RouterDashboard"
+              component={RouterDashboardScreen}
+              options={{ headerShown: true, title: 'Router Dashboard' }}
             />
             {PLACEHOLDER_SCREENS.map((s) => (
               <Stack.Screen
