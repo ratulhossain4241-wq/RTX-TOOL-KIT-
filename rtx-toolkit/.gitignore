@@ -1,0 +1,36 @@
+# --- dependencies ---
+node_modules/
+bot/node_modules/
+
+# --- expo ---
+.expo/
+dist/
+web-build/
+
+# --- native build output (after `expo prebuild`) ---
+android/
+ios/
+
+# --- env / secrets - NEVER commit these ---
+.env
+.env.local
+bot/.env
+*.keystore
+*.jks
+google-services.json
+GoogleService-Info.plist
+service-account.json
+
+# --- logs ---
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# --- OS / editor ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- EAS ---
+.eas/
