@@ -14,6 +14,8 @@ import PaymentRequestScreen from '../screens/premium/PaymentRequestScreen';
 import PlaceholderScreen from '../screens/PlaceholderScreen';
 import SpeedTestScreen from '../screens/tools/SpeedTestScreen';
 import StorageAnalyzerScreen from '../screens/tools/StorageAnalyzerScreen';
+import QrToolScreen from '../screens/tools/QrToolScreen';
+import ClipboardCleanerScreen from '../screens/tools/ClipboardCleanerScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,10 +46,8 @@ const PLACEHOLDER_SCREENS = [
   { name: 'AppManager', title: 'App Manager' },
   { name: 'SystemMonitor', title: 'CPU / RAM Monitor' },
   { name: 'AppLock', title: 'App Lock' },
-  { name: 'ClipboardCleaner', title: 'Clipboard Cleaner' },
   { name: 'DuplicateFinder', title: 'Duplicate Finder' },
   { name: 'WifiScanner', title: 'WiFi Scanner' },
-  { name: 'QrTool', title: 'QR Tool' },
   { name: 'FakeAppDetector', title: 'Fake App Detector' },
   { name: 'TvRemote', title: 'TV Remote' },
 ];
@@ -86,6 +86,16 @@ export default function AppNavigator() {
               name="StorageAnalyzer"
               component={StorageAnalyzerScreen}
               options={{ headerShown: true, title: 'Storage Analyzer' }}
+            />
+            <Stack.Screen
+              name="QrTool"
+              component={QrToolScreen}
+              options={{ headerShown: true, title: 'QR Tool' }}
+            />
+            <Stack.Screen
+              name="ClipboardCleaner"
+              component={ClipboardCleanerScreen}
+              options={{ headerShown: true, title: 'Clipboard Cleaner' }}
             />
             {PLACEHOLDER_SCREENS.map((s) => (
               <Stack.Screen
