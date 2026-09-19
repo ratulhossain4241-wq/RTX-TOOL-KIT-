@@ -1,0 +1,19 @@
+{
+  "name": "rtx-toolkit-admin-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Telegram admin bot for RTX TOOL KIT - approve/reject premium payment requests",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "firebase-admin": "^12.3.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
