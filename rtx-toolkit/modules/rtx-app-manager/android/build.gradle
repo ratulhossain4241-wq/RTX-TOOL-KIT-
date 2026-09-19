@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'expo-module-gradle-plugin'
+
+group = 'expo.modules.rtxappmanager'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.rtxappmanager"
+  defaultConfig {
+    minSdkVersion getMinSdkVersionFromExpoModuleConfig()
+    targetSdkVersion getTargetSdkVersionFromExpoModuleConfig()
+  }
+}
