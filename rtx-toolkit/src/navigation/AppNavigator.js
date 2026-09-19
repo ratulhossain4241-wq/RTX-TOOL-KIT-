@@ -12,6 +12,8 @@ import DashboardScreen from '../screens/DashboardScreen';
 import PremiumScreen from '../screens/premium/PremiumScreen';
 import PaymentRequestScreen from '../screens/premium/PaymentRequestScreen';
 import PlaceholderScreen from '../screens/PlaceholderScreen';
+import SpeedTestScreen from '../screens/tools/SpeedTestScreen';
+import StorageAnalyzerScreen from '../screens/tools/StorageAnalyzerScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,12 +42,10 @@ const PLACEHOLDER_SCREENS = [
   { name: 'RouterDashboard', title: 'Router Dashboard' },
   { name: 'BatteryOptimizer', title: 'Battery Optimizer' },
   { name: 'AppManager', title: 'App Manager' },
-  { name: 'StorageAnalyzer', title: 'Storage Analyzer' },
   { name: 'SystemMonitor', title: 'CPU / RAM Monitor' },
   { name: 'AppLock', title: 'App Lock' },
   { name: 'ClipboardCleaner', title: 'Clipboard Cleaner' },
   { name: 'DuplicateFinder', title: 'Duplicate Finder' },
-  { name: 'SpeedTest', title: 'Speed Test' },
   { name: 'WifiScanner', title: 'WiFi Scanner' },
   { name: 'QrTool', title: 'QR Tool' },
   { name: 'FakeAppDetector', title: 'Fake App Detector' },
@@ -76,6 +76,16 @@ export default function AppNavigator() {
               name="PaymentRequest"
               component={PaymentRequestScreen}
               options={{ headerShown: true, title: 'Payment' }}
+            />
+            <Stack.Screen
+              name="SpeedTest"
+              component={SpeedTestScreen}
+              options={{ headerShown: true, title: 'Speed Test' }}
+            />
+            <Stack.Screen
+              name="StorageAnalyzer"
+              component={StorageAnalyzerScreen}
+              options={{ headerShown: true, title: 'Storage Analyzer' }}
             />
             {PLACEHOLDER_SCREENS.map((s) => (
               <Stack.Screen
