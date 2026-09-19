@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!--
+    This manifest fragment is automatically merged into the app's final
+    AndroidManifest.xml by Android's Gradle manifest merger - no manual
+    copy-paste needed, no config plugin needed. It declares the VpnService
+    so Android knows this app can offer a local VPN (required for any
+    system-wide, DNS-based ad blocking - Android does not allow apps to
+    filter other apps' network traffic any other way without root).
+  -->
+  <application>
+    <service
+      android:name="expo.modules.rtxadblocker.RtxAdBlockVpnService"
+      android:permission="android.permission.BIND_VPN_SERVICE"
+      android:exported="false"
+      android:foregroundServiceType="specialUse">
+      <intent-filter>
+        <action android:name="android.net.VpnService" />
+      </intent-filter>
+    </service>
+  </application>
+</manifest>
