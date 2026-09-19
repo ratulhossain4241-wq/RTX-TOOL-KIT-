@@ -23,6 +23,10 @@ import AppLockScreen from '../screens/tools/AppLockScreen';
 import BatteryOptimizerScreen from '../screens/tools/BatteryOptimizerScreen';
 import SystemMonitorScreen from '../screens/tools/SystemMonitorScreen';
 import RouterDashboardScreen from '../screens/tools/RouterDashboardScreen';
+import AppManagerScreen from '../screens/tools/AppManagerScreen';
+import WifiScannerScreen from '../screens/tools/WifiScannerScreen';
+import FakeAppDetectorScreen from '../screens/tools/FakeAppDetectorScreen';
+import AdBlockerScreen from '../screens/tools/AdBlockerScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,10 +49,6 @@ const NavDarkTheme = {
 // in a later batch - this list is the ONLY place to update when a real
 // screen replaces a placeholder (see comment at the bottom of this file).
 const PLACEHOLDER_SCREENS = [
-  { name: 'AdBlocker', title: 'Ad Blocker' },
-  { name: 'AppManager', title: 'App Manager' },
-  { name: 'WifiScanner', title: 'WiFi Scanner' },
-  { name: 'FakeAppDetector', title: 'Fake App Detector' },
   { name: 'TvRemote', title: 'TV Remote' },
 ];
 
@@ -131,6 +131,26 @@ export default function AppNavigator() {
               name="RouterDashboard"
               component={RouterDashboardScreen}
               options={{ headerShown: true, title: 'Router Dashboard' }}
+            />
+            <Stack.Screen
+              name="AppManager"
+              component={AppManagerScreen}
+              options={{ headerShown: true, title: 'App Manager' }}
+            />
+            <Stack.Screen
+              name="WifiScanner"
+              component={WifiScannerScreen}
+              options={{ headerShown: true, title: 'WiFi Scanner' }}
+            />
+            <Stack.Screen
+              name="FakeAppDetector"
+              component={FakeAppDetectorScreen}
+              options={{ headerShown: true, title: 'Fake App Detector' }}
+            />
+            <Stack.Screen
+              name="AdBlocker"
+              component={AdBlockerScreen}
+              options={{ headerShown: true, title: 'Ad Blocker' }}
             />
             {PLACEHOLDER_SCREENS.map((s) => (
               <Stack.Screen
