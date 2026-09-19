@@ -1,0 +1,66 @@
+# Bare Workflow Setup (for the last 6 native features)
+
+The app has been running on **Expo Managed Workflow** so far - everything up to
+this point works with just `npx expo start` / `eas build`, no native code
+needed. The remaining 6 features need real native Android code:
+
+- Ad Blocker (system-wide, VPNService)
+- Router Dashboard (already pure JS/fetch - does NOT need bare workflow)
+- App Manager (installed apps list)
+- WiFi Scanner (nearby networks)
+- Fake App Detector (uses App Manager's native module)
+- TV Remote (Android TV Remote Service protocol)
+
+Correction from earlier estimate: **Router Dashboard does not need bare
+workflow** - talking to a router's own web admin panel is just `fetch()`
+calls, which works fine in managed workflow. Only App Manager, WiFi
+Scanner, Fake App Detector, Ad Blocker, and TV Remote need native modules.
+
+## Step 1: Run prebuild (one-time, local machine)
+
+```bash
+npx expo prebuild --platform android
+```
+
+This generates an `android/` folder with real native Android project files
+(Kotlin/Java, Gradle). From this point on:
+- You can still use most Expo JS APIs normally
+- Native modules (added in upcoming batches) go inside `android/app/src/main/java/...`
+- `android/` is gitignored (see `.gitignore`) - each developer/CI runs
+  `expo prebuild` fresh rather than committing generated native code,
+  UNLESS you start hand-editing native files, in which case remove
+  `android/` from `.gitignore` and commit it.
+
+## Step 2: Install a dev client to test native modules
+
+Managed Expo Go app CANNOT run custom native modules. You need:
+
+```bash
+npx expo install expo-dev-client
+eas build --profile development --platform android
+```
+
+Install the resulting APK on your test phone - this replaces Expo Go for
+this project from now on.
+
+## Step 3: Play Store caveat for QUERY_ALL_PACKAGES
+
+The App Manager feature needs the `QUERY_ALL_PACKAGES` Android permission
+to list all installed apps. **Google Play restricts this permission** -
+apps are usually rejected unless the app's core purpose is something like
+a launcher, antivirus, or file manager. Before publishing to Play Store:
+- Read Google's current policy on QUERY_ALL_PACKAGES
+- Be ready to justify it in the Play Console's permissions declaration form
+- Alternative: request permission for specific known package names only
+  (no QUERY_ALL_PACKAGES needed) if you only need to check for specific
+  apps (useful for Fake App Detector's "known fake app" checks)
+
+## Step 4: Upcoming native module batches
+
+Each of the 5 remaining features will be delivered as:
+1. A native Android module (Kotlin file(s) under `android/app/src/main/java/`)
+2. A JS bridge file that calls the native module
+3. The screen UI
+
+Render deployment (the Telegram bot) is unaffected by any of this - the
+bot is a separate plain Node.js project.
