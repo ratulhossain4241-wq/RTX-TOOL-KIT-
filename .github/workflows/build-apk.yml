@@ -1,16 +1,12 @@
 name: Build RTX TOOL KIT APK
 
 # Runs on every push to main, or manually from the Actions tab.
-# Requires an EXPO_TOKEN secret (Expo account access token) set in:
-# GitHub repo -> Settings -> Secrets and variables -> Actions -> New secret
-#
-# The app's files live in the rtx-toolkit/ subfolder of this repo (not the
-# repo root) - every step below runs with working-directory: rtx-toolkit
-# to match.
+# Builds the APK directly on GitHub's own servers using Gradle - NO Expo
+# account, EXPO_TOKEN, or EAS project needed at all.
 #
 # After this workflow finishes, go to the Actions tab -> click this run
 # -> scroll to "Artifacts" at the bottom -> download "rtx-toolkit-apk".
-# That zip contains the installable .apk file.
+# Unzip it on your phone and tap the .apk file to install.
 
 on:
   push:
@@ -23,8 +19,6 @@ jobs:
     defaults:
       run:
         working-directory: rtx-toolkit
-    env:
-      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -34,24 +28,28 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
       - name: Install dependencies
         run: npm install
 
-      - name: Install EAS CLI
-        run: npm install -g eas-cli
+      - name: Generate native Android project
+        run: npx expo prebuild --platform android --no-install
 
-      - name: Build APK on EAS (waits until done)
-        run: eas build --platform android --profile preview --non-interactive --wait
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
 
-      - name: Download built APK from EAS
-        run: |
-          BUILD_URL=$(eas build:list --platform android --limit 1 --json --non-interactive | node -e "process.stdin.once('data', d => console.log(JSON.parse(d)[0].artifacts.buildUrl))")
-          echo "Downloading APK from $BUILD_URL"
-          curl -L "$BUILD_URL" -o rtx-toolkit.apk
+      - name: Build debug APK
+        working-directory: rtx-toolkit/android
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK as downloadable artifact
         uses: actions/upload-artifact@v4
         with:
           name: rtx-toolkit-apk
-          path: rtx-toolkit/rtx-toolkit.apk
+          path: rtx-toolkit/android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
