@@ -46,13 +46,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
-      - name: Build debug APK
+      - name: Build release APK (JS bundled in, no Metro needed)
         working-directory: rtx-toolkit/android
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleRelease --no-daemon
 
       - name: Upload APK as downloadable artifact
         uses: actions/upload-artifact@v4
         with:
           name: rtx-toolkit-apk
-          path: rtx-toolkit/android/app/build/outputs/apk/debug/app-debug.apk
+          path: rtx-toolkit/android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
