@@ -6,8 +6,7 @@ name: Build RTX TOOL KIT APK
 #
 # The app's files live in the rtx-toolkit/ subfolder of this repo (not the
 # repo root) - every step below runs with working-directory: rtx-toolkit
-# to match. If you ever move the app files up to the repo root instead,
-# remove every "working-directory: rtx-toolkit" line below.
+# to match.
 #
 # After this workflow finishes, go to the Actions tab -> click this run
 # -> scroll to "Artifacts" at the bottom -> download "rtx-toolkit-apk".
@@ -24,6 +23,8 @@ jobs:
     defaults:
       run:
         working-directory: rtx-toolkit
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -31,18 +32,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          # no cache: here - a package-lock.json hasn't been generated
-          # yet (see docs/BARE_WORKFLOW_SETUP.md); caching needs one.
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
 
-      - name: Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
 
       - name: Build APK on EAS (waits until done)
         run: eas build --platform android --profile preview --non-interactive --wait
