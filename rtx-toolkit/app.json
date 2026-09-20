@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "RTX TOOL KIT",
-    "slug": "rtx-toolkit",
+    "slug": "rtratul",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -48,7 +48,7 @@
     "owner": "ratuluiux",
     "extra": {
       "eas": {
-        "projectId": "79b587d3-dd24-433a-9794-fe434231c6d1"
+        "projectId": "ba1a9dc1-7f04-474d-8255-32d6368eace2"
       }
     }
   }
