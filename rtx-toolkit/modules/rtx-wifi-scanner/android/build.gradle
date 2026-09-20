@@ -1,14 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'expo-module-gradle-plugin'
 
 group = 'expo.modules.rtxwifiscanner'
 version = '1.0.0'
 
+def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useExpoPublishing()
+useDefaultAndroidSdkVersions()
+
 android {
   namespace "expo.modules.rtxwifiscanner"
-  defaultConfig {
-    minSdkVersion getMinSdkVersionFromExpoModuleConfig()
-    targetSdkVersion getTargetSdkVersionFromExpoModuleConfig()
-  }
 }
