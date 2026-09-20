@@ -52,9 +52,10 @@ class RtxAdBlockerModule : Module() {
     }
 
     Function("stop") {
-      val context = appContext.reactContext ?: return@Function
-      context.stopService(Intent(context, RtxAdBlockVpnService::class.java))
-      Unit
+      val context = appContext.reactContext
+      if (context != null) {
+        context.stopService(Intent(context, RtxAdBlockVpnService::class.java))
+      }
     }
 
     Function("isActive") {
