@@ -44,6 +44,12 @@
           "photosPermission": "ডুপ্লিকেট ছবি খুঁজতে গ্যালারি এক্সেস দরকার।"
         }
       ]
-    ]
+    ],
+    "owner": "ratul4241s",
+    "extra": {
+      "eas": {
+        "projectId": "e6460da0-7ecb-4dad-ac47-0f5ad6a34859"
+      }
+    }
   }
 }
