@@ -4,6 +4,11 @@ name: Build RTX TOOL KIT APK
 # Requires an EXPO_TOKEN secret (Expo account access token) set in:
 # GitHub repo -> Settings -> Secrets and variables -> Actions -> New secret
 #
+# The app's files live in the rtx-toolkit/ subfolder of this repo (not the
+# repo root) - every step below runs with working-directory: rtx-toolkit
+# to match. If you ever move the app files up to the repo root instead,
+# remove every "working-directory: rtx-toolkit" line below.
+#
 # After this workflow finishes, go to the Actions tab -> click this run
 # -> scroll to "Artifacts" at the bottom -> download "rtx-toolkit-apk".
 # That zip contains the installable .apk file.
@@ -16,6 +21,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rtx-toolkit
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -24,10 +32,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
+          # no cache: here - a package-lock.json hasn't been generated
+          # yet (see docs/BARE_WORKFLOW_SETUP.md); caching needs one.
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8
@@ -48,5 +57,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rtx-toolkit-apk
-          path: rtx-toolkit.apk
+          path: rtx-toolkit/rtx-toolkit.apk
           retention-days: 30
